@@ -43,8 +43,9 @@ export const CartItemList = ({ data, updateQuantity, removeCartItem }) => {
         {data.map((cartItem) => (
           <CartItem
             key={cartItem.id}
-            data={cartItem.product}
-            quantity={cartItem.quantity}
+            // data={cartItem.product}
+            // quantity={cartItem.quantity}
+            {...cartItem}
             updateQuantity={updateQuantity}
             removeCartItem={removeCartItem}
           />

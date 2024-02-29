@@ -84,7 +84,11 @@ export const CartItem = ({ product, quantity, updateQuantity, removeCartItem }) 
         <ItemInfo>
           <Title>{product.name}</Title>
           <Subtitle>฿{numberWithCommas(product.price)} ต่อชิ้น</Subtitle>
-          <DeleteButton>ลบ</DeleteButton>
+          <DeleteButton onClick={()=>{
+            if (window.confirm("คุณต้องการจะลบใช่ไหม?")) {
+              removeCartItem(product.id)
+            }
+          }}>ลบ</DeleteButton>
         </ItemInfo>
       </div>
     </TableCell>
@@ -94,7 +98,7 @@ export const CartItem = ({ product, quantity, updateQuantity, removeCartItem }) 
     </TableCell>
 
     <TableCell style={{ textAlign: 'right' }}>
-      <TotalPrice>฿{numberWithCommas(product.price)}</TotalPrice>
+      <TotalPrice>฿{numberWithCommas(product.price * quantity)}</TotalPrice>
     </TableCell>
   </TableRow>
 );
