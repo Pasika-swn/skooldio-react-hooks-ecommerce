@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ColorRing } from 'react-loader-spinner';
 import useAPI from '../hooks/useAPI';
+import useCart from '../hooks/useCart'; 
 
 const Container = styled(BaseContainer)`
   padding-top: 78px;
@@ -78,6 +79,9 @@ export const ProductDetail = () => {
   //api
   const { data, loading } = useAPI('/products/' + productId);
 
+  const [quantity, setQuantity] = useState("1")
+  const { addCartItem} = useCart()
+
   //ui
   if (loading || !data) {
     return (
@@ -105,8 +109,8 @@ export const ProductDetail = () => {
         </Subtitle>
         <Title>{data.name}</Title>
         <Description>{data.description}</Description>
-        <Input style={{ marginBottom: '40px' }} type={'number'} label={'Quantity'} />
-        <Button>Add to Cart</Button>
+        <Input value={quantity} onChange={(e)=> setQuantity(e.target.value)} style={{ marginBottom: '40px' }} type={'number'} label={'Quantity'} />
+        <Button onClick={()=>addCartItem(data, parseInt(quantity))}>Add to Cart</Button>
       </ProductInfo>
     </Container>
   );
