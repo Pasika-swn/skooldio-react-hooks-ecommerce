@@ -5,7 +5,7 @@ import Button from '../components/Button';
 import Input from '../components/Input';
 
 import { numberWithCommas } from '../utils';
-import { products } from '../data';
+// import { products } from '../data';
 
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -65,7 +65,7 @@ const LoadingContainer = styled.div`
   height: 100%;
 `;
 
-const data = products[0];
+// const data = products[0];
 
 /**
  * Below is the main ProductDetail component.

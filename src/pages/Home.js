@@ -3,6 +3,7 @@ import Hero from '../components/Hero';
 import ProductList from '../components/ProductList';
 import { ColorRing } from 'react-loader-spinner';
 import styled from 'styled-components';
+import useAPI from '../hooks/useAPI'
 
 // import { products } from '../data';
 const LoadingContainer = styled.div`
@@ -13,24 +14,9 @@ const LoadingContainer = styled.div`
 `;
 
 export const Home = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const {data, loading} = useAPI("/products")
 
-  useEffect(() => {
-    setLoading(true);
-    fetch('https://us-central1-skooldio-react-hooks.cloudfunctions.net/products')
-      .then((resp) => resp.json())
-      .then((data) => {
-        // console.log("data",data);
-        setProducts(data);
-        setLoading(false);
-      });
-  }, []);
-
-  // if(loading) {
-  //   return <span style={{fontSize:}}>Loading...</span>
-  // }
-
+  
   return (
     <div>
       <Hero />
@@ -47,7 +33,7 @@ export const Home = () => {
           />
         </LoadingContainer>
       )}
-      {!loading && <ProductList data={products} />}
+      {!loading && data && <ProductList data={data} />}
     </div>
   );
 };
