@@ -19,6 +19,7 @@ export const useCart = () => {
   //   };
 
   const addCartItem = (product, quantity) => {
+    quantity = parseInt(quantity)
     const matchingCartItem = cartItems.find((cartItem) => cartItem.product.id === product.id);
 
     if (matchingCartItem) {
